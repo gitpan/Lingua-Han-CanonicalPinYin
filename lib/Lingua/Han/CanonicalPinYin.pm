@@ -2,7 +2,8 @@ package Lingua::Han::CanonicalPinYin;
 use strict;
 use warnings;
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
+
 use base 'Exporter';
 
 our @EXPORT_OK = 'canonicalize_pinyin';
