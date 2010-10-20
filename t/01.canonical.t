@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 72;
+use Test::More tests => 80;
 use Lingua::Han::CanonicalPinYin 'canonicalize_pinyin';
 use Encode;
 use utf8;
@@ -12,8 +12,10 @@ my %map = (
     i  => [ 'ji',  'ying' ],
     iu => [ 'liu', 'qiu' ],
     u  => [ 'ju',  'gun' ],
-    v  => [ 'lv',  'lve' ],
-    ü  => [ 'lü', 'lüe' ],
+    v  => [ 'lv' ],
+    ü  => [ 'lü' ],
+    ie  => [ 'jie', 'lie' ],
+    uo  => [ 'guo', 'huo' ],
 );
 
 my @tones = ( undef, "\x{304}", "\x{301}", "\x{30c}", "\x{300}" );

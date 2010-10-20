@@ -22,15 +22,19 @@ sub canonicalize_pinyin {
     }
 
     $tone = $tones[$tone-1];
-    if ( $pinyin =~ /(a|o|e|iu|i|u|v|ü)/i ) {
-        my $vowel = $1;
-        if ( $vowel eq 'v' ) {
-            $pinyin =~ s/v/u\x{308}$tone/;
-        }
-        else {
-            $pinyin =~ s/$vowel/$vowel$tone/;
+    for my $vowel (qw/a o e iu i u v ü/) {
+        if ( $pinyin =~ /$vowel/i ) {
+            if ( $vowel eq 'v' ) {
+                $pinyin =~ s/v/u\x{308}$tone/;
+            }
+            else {
+
+                $pinyin =~ s/$vowel/$vowel$tone/;
+                last;
+            }
         }
     }
+
     return $pinyin;
 };
 
