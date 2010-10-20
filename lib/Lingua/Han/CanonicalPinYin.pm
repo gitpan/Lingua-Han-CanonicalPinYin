@@ -2,7 +2,7 @@ package Lingua::Han::CanonicalPinYin;
 use strict;
 use warnings;
 
-our $VERSION = 0.02;
+our $VERSION = 0.04;
 
 use base 'Exporter';
 
@@ -11,7 +11,7 @@ use utf8;
 use Encode;
 my @tones = ( "\x{304}", "\x{301}", "\x{30c}", "\x{300}" );
 sub canonicalize_pinyin {
-    my $pinyin = shift;
+    my $pinyin = lc shift;
     $pinyin = decode_utf8( $pinyin ) unless utf8::is_utf8( $pinyin );
     my $tone;
     ($pinyin, $tone) = ( $1, $2 ) if $pinyin =~ /^(.*)(\d)$/;
@@ -23,17 +23,17 @@ sub canonicalize_pinyin {
 
     $tone = $tones[$tone-1];
     for my $vowel (qw/a o e iu i u v ü/) {
-        if ( $pinyin =~ /$vowel/i ) {
+        if ( $pinyin =~ /$vowel/ ) {
             if ( $vowel eq 'v' ) {
                 $pinyin =~ s/v/u\x{308}$tone/;
             }
             else {
-
                 $pinyin =~ s/$vowel/$vowel$tone/;
-                last;
             }
+            last;
         }
     }
+    $pinyin =~ s/v/ü/g;
 
     return $pinyin;
 };

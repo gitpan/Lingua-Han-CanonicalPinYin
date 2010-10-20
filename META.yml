@@ -14,4 +14,4 @@ meta-spec:
 name: Lingua-Han-CanonicalPinYin
 requires:
   perl: v5.8.8
-version: 0.03
+version: 0.04
